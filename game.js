@@ -1,0 +1,68 @@
+var buttonColors = ["red", "blue", "green", "yellow"];
+var gamePattern = [];
+var userClickedPattern = [];
+var gameStarted = false;
+var level = 0;
+
+$(document).on("keydown", function () {
+  if (!gameStarted) {
+    $("h1").text(`Level ${level}`);
+    nextSequence();
+    gameStarted = true;
+  }
+});
+
+$(".btn").on("click", function () {
+  var userChosenColor = $(this).attr("id");
+  userClickedPattern.push(userChosenColor);
+
+  animatePress(userChosenColor);
+  playSound(userChosenColor);
+
+  checkAnswer(userClickedPattern.length - 1);
+});
+
+function playSound(name) {
+  var buttonSound = new Audio(`./sounds/${name}.mp3`);
+  buttonSound.play();
+}
+
+function animatePress(currentColor) {
+  $(`#${currentColor}`).addClass("pressed");
+
+  setTimeout(function () {
+    $(`#${currentColor}`).removeClass("pressed");
+  }, 100);
+}
+
+function nextSequence() {
+  userClickedPattern = [];
+
+  level += 1;
+  $("h1").text(`Nível ${level}`);
+
+  var randomNumber = Math.floor(Math.random() * 4);
+  var randomChosenColor = buttonColors[randomNumber];
+
+  gamePattern.push(randomChosenColor);
+
+  $(`#${randomChosenColor}`).fadeTo(100, 0.3, function () {
+    $(this).fadeTo(500, 1.0);
+  });
+
+  playSound(randomChosenColor);
+}
+
+function checkAnswer(currentLevel) {
+  if (gamePattern[currentLevel] === userClickedPattern[currentLevel]) {
+    console.log("success");
+
+    if (userClickedPattern.length === gamePattern.length) {
+      setTimeout(function () {
+        nextSequence();
+      }, 1000);
+    }
+  } else {
+    
+  }
+}

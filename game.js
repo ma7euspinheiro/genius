@@ -37,7 +37,7 @@ $(".btn").on("click", function () {
 });
 
 function playSound(name) {
-  var buttonSound = new Audio(`./sounds/${name}.mp3`);
+  var buttonSound = new Audio(`sounds/${name}.mp3`);
   buttonSound.play();
 }
 
@@ -50,7 +50,7 @@ function animatePress(currentColor) {
 }
 
 function wait(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 async function nextSequence() {
@@ -71,14 +71,14 @@ async function nextSequence() {
 
     playSound(randomChosenColor);
   } else {
-      for (let index = 0; index < gamePattern.length; index++) {
-        $(`#${gamePattern[index]}`).fadeTo(100, 0.3, function () {
-          $(this).fadeTo(500, 1.0);
-        });  
-        playSound(gamePattern[index]);  
+    for (let index = 0; index < gamePattern.length; index++) {
+      $(`#${gamePattern[index]}`).fadeTo(100, 0.3, function () {
+        $(this).fadeTo(500, 1.0);
+      });
+      playSound(gamePattern[index]);
 
-        await wait(700);
-      }
+      await wait(700);
+    }
   }
 }
 

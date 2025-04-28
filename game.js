@@ -13,13 +13,15 @@ $(document).on("keydown", function () {
 });
 
 $(".btn").on("click", function () {
-  var userChosenColor = $(this).attr("id");
-  userClickedPattern.push(userChosenColor);
+  if (level >= 1) {
+    var userChosenColor = $(this).attr("id");
+    userClickedPattern.push(userChosenColor);
 
-  animatePress(userChosenColor);
-  playSound(userChosenColor);
+    animatePress(userChosenColor);
+    playSound(userChosenColor);
 
-  checkAnswer(userClickedPattern.length - 1);
+    checkAnswer(userClickedPattern.length - 1);
+  }
 });
 
 function playSound(name) {
@@ -63,6 +65,21 @@ function checkAnswer(currentLevel) {
       }, 1000);
     }
   } else {
-    
+    var wrongSound = new Audio("sounds/wrong.mp3");
+    wrongSound.play();
+    $("body").addClass("game-over");
+
+    setTimeout(function () {
+      $("body").removeClass("game-over");
+    }, 200);
+
+    $("#level-title").text("Game Over, Aperte Qualquer Tecla para Reiniciar");
+    startOver();
   }
+}
+
+function startOver() {
+  level = 0;
+  gamePattern = [];
+  gameStarted = false;
 }

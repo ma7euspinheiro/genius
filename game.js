@@ -4,6 +4,7 @@ var userClickedPattern = [];
 var gameStarted = false;
 var level = 0;
 var gameModeSelected;
+var acceptingUserInput = false;
 
 $(document).on("keydown", function () {
   if (!gameStarted && gameModeSelected != null) {
@@ -13,27 +14,42 @@ $(document).on("keydown", function () {
   }
 });
 
-$(".game-modes").click(function () {
+$(".game-modes").click(async function () {
+  await wait(200);
+
   if (!gameStarted) {
     $("h1").text(`Level ${level}`);
+    $(".colors-container").toggle();
+    $(".gm-container").toggle();
+    $("#main-menu-button").toggle();
     gameStarted = true;
-    $(".colors-container").addClass("active");
-    $(".gm-container").removeClass("active");
     gameModeSelected = this.id;
     nextSequence();
   }
 });
 
+$("#main-menu-button").click(async function () {
+  await wait(200);
+
+  startOver();
+  gameModeSelected = null;
+  $("#main-menu-button").toggle();
+  $(".colors-container").toggle();
+  $(".gm-container").toggle();
+
+  $("#level-title").text("SELECIONE UM MODO DE JOGO");
+});
+
 $(".btn").on("click", function () {
-  if (level >= 1) {
-    var userChosenColor = $(this).attr("id");
-    userClickedPattern.push(userChosenColor);
+  if (!acceptingUserInput || level < 1) return;
 
-    animatePress(userChosenColor);
-    playSound(userChosenColor);
+  var userChosenColor = $(this).attr("id");
+  userClickedPattern.push(userChosenColor);
 
-    checkAnswer(userClickedPattern.length - 1);
-  }
+  animatePress(userChosenColor);
+  playSound(userChosenColor);
+
+  checkAnswer(userClickedPattern.length - 1);
 });
 
 function playSound(name) {
@@ -55,9 +71,10 @@ function wait(ms) {
 
 async function nextSequence() {
   userClickedPattern = [];
+  acceptingUserInput = false;
 
   level += 1;
-  $("h1").text(`Nível ${level}`);
+  $("h1").text(`NIVEL ${level}`);
 
   var randomNumber = Math.floor(Math.random() * 4);
   var randomChosenColor = buttonColors[randomNumber];
@@ -65,11 +82,15 @@ async function nextSequence() {
   gamePattern.push(randomChosenColor);
 
   if (gameModeSelected === "game-mode2") {
+    acceptingUserInput = false;
+
     $(`#${randomChosenColor}`).fadeTo(100, 0.3, function () {
       $(this).fadeTo(500, 1.0);
     });
 
     playSound(randomChosenColor);
+
+    acceptingUserInput = true;
   } else {
     for (let index = 0; index < gamePattern.length; index++) {
       $(`#${gamePattern[index]}`).fadeTo(100, 0.3, function () {
@@ -79,6 +100,8 @@ async function nextSequence() {
 
       await wait(700);
     }
+
+    acceptingUserInput = true;
   }
 }
 
@@ -98,7 +121,7 @@ function checkAnswer(currentLevel) {
       $("body").removeClass("game-over");
     }, 200);
 
-    $("#level-title").text("Game Over, Aperte Qualquer Tecla para Reiniciar");
+    $("#level-title").text("GAME OVER, APERTE QUALQUER TECLA PARA REINICIAR");
     startOver();
   }
 }

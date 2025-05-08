@@ -1,6 +1,7 @@
 body {
   text-align: center;
   background-color: #011f3f;
+  height: 100px;
 }
 
 #level-title {
@@ -10,7 +11,7 @@ body {
   color: #fef2bf;
 }
 
-.colors-container {  
+.colors-container {
   width: 400px;
   height: 400px;
   margin: auto;
@@ -18,7 +19,7 @@ body {
   display: none;
 }
 
-.btn {  
+.btn {
   height: 200px;
   width: 200px;
   border: 5px solid black;
@@ -29,13 +30,13 @@ body {
 .gm-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  height: 300px;
 }
 
 .game-modes {
   margin: 25px;
-  height: 100px;
+  height: 500px;
   width: 500px;
 }
 
@@ -77,10 +78,6 @@ body {
   background-color: grey;
 }
 
-.active {
-  display: block;
-}
-
 button {
   border-radius: 10px;
   font-family: "Press Start 2P", cursive;
@@ -104,4 +101,126 @@ button:active {
   border-radius: 10px;
   background-color: #fef2bf;
   display: none;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  #level-title {
+    font-size: 1.5rem;
+    padding-top: 50px;
+  }
+
+  .gm-container {
+    justify-content: center;
+    height: 400px;
+  }
+
+  .game-modes {
+    height: 100px;
+    width: 300px;
+    font-size: 1px;
+  }
+
+  .colors-container {
+    width: 300px;
+    height: 300px;
+    margin-top: 25%;
+    border: 1px solid red;
+  }
+
+  .btn {
+    height: 150px;
+    width: 150px;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) and (max-width: 768px) {
+  .gm-container {
+    justify-content: center;
+    height: 700px;
+  }
+
+  .game-modes {
+    height: 200px;
+    width: 600px;
+    font-size: 30px;
+  }
+
+  .colors-container {
+    width: 500px;
+    height: 500px;
+    margin-top: 25%;
+  }
+
+  .btn {
+    height: 250px;
+    width: 250px;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 769px) and (max-width: 1200px){
+  #level-title {
+    font-size: 5rem;
+  }
+
+  .gm-container {
+    justify-content: center;
+    height: 700px;
+  }
+
+  .game-modes {
+    height: 200px;
+    width: 600px;
+    font-size: 30px;
+  }
+
+  .colors-container {
+    width: 800px;
+    height: 800px;
+    margin-top: 25%;
+  }
+
+  .btn {
+    height: 400px;
+    width: 400px;
+  }
+
+  #main-menu-button {
+    height: 100px;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) and (min-height: 1000px) {
+  #level-title {
+    font-size: 5rem;
+    margin-bottom: 3%;
+  }
+
+  .gm-container {
+    justify-content: center;
+    height: 700px;
+  }
+
+  .game-modes {
+    height: 200px;
+    width: 600px;
+    font-size: 30px;
+  }
+
+  .colors-container {
+    width: 800px;
+    height: 800px;    
+  }
+
+  .btn {
+    height: 400px;
+    width: 400px;
+  }
+
+  #main-menu-button {
+    height: 100px;
+  }
 }

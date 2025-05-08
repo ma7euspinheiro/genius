@@ -19,7 +19,7 @@ $(document).on("touchstart", function (evento) {
 }); //mobile
 $(document).on("keydown", gameStart); //desktop
 
-$(".game-modes").one("click", async function () {
+$(".game-modes").on("click", async function () {
   await wait(200);
 
   if (!gameStarted) {

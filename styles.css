@@ -86,6 +86,7 @@ button {
   box-shadow: 0 6px #635800;
   cursor: pointer;
   transition: all 0.1s ease-in-out;
+  color: black;
 }
 
 button:active {
@@ -148,6 +149,7 @@ button:active {
     height: 200px;
     width: 600px;
     font-size: 30px;
+    line-height: 50px;
   }
 
   .colors-container {
@@ -177,6 +179,7 @@ button:active {
     height: 200px;
     width: 600px;
     font-size: 30px;
+    line-height: 75px;
   }
 
   .colors-container {

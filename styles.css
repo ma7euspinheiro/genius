@@ -117,8 +117,7 @@ button:active {
 
   .game-modes {
     height: 100px;
-    width: 300px;
-    font-size: 1px;
+    width: 300px;    
   }
 
   .colors-container {
@@ -136,6 +135,10 @@ button:active {
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) and (max-width: 768px) {
+  #level-title {
+    font-size: 5rem;
+  }
+
   .gm-container {
     justify-content: center;
     height: 700px;
@@ -160,7 +163,7 @@ button:active {
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 769px) and (max-width: 1200px){
+@media only screen and (min-width: 769px) and (max-width: 1200px) {
   #level-title {
     font-size: 5rem;
   }
@@ -212,7 +215,7 @@ button:active {
 
   .colors-container {
     width: 800px;
-    height: 800px;    
+    height: 800px;
   }
 
   .btn {

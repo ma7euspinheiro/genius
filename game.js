@@ -9,9 +9,24 @@ var acceptingUserInput = false;
 function gameStart() {
   if (!gameStarted && gameModeSelected != null) {
     gameStarted = true;
+
+    ["red", "blue", "green", "yellow"].forEach((color) => {
+      const audio = new Audio(`sounds/${color}.mp3`);
+      audio.volume = 0;
+      audio.play().catch(() => {});
+    });
+
     nextSequence();
   }
 }
+
+var sounds = {
+  red: new Audio("sounds/red.mp3"),
+  blue: new Audio("sounds/blue.mp3"),
+  green: new Audio("sounds/green.mp3"),
+  yellow: new Audio("sounds/yellow.mp3"),
+  wrong: new Audio("sounds/wrong.mp3"),
+};
 
 $(document).on("touchstart", function (evento) {
   event.preventDefault();
@@ -57,9 +72,11 @@ $(".btn").on("click", function () {
 });
 
 function playSound(name) {
-  var buttonSound = new Audio(`sounds/${name}.mp3`);
-  buttonSound.currentTime = 0;
-  buttonSound.play();
+  const sound = sounds[name];
+  if (sound) {
+    sound.currentTime = 0;
+    sound.play().catch(() => {});
+  }
 }
 
 function animatePress(currentColor) {

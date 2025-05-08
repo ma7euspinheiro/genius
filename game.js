@@ -6,25 +6,29 @@ var level = 0;
 var gameModeSelected;
 var acceptingUserInput = false;
 
-$(document).on("keydown", function () {
+function gameStart() {
   if (!gameStarted && gameModeSelected != null) {
-    $("h1").text(`Level ${level}`);
-    nextSequence();
     gameStarted = true;
+    nextSequence();
   }
-});
+}
 
-$(".game-modes").click(async function () {
+$(document).on("touchstart", function (evento) {
+  event.preventDefault();
+  gameStart();
+}); //mobile
+$(document).on("keydown", gameStart); //desktop
+
+$(".game-modes").one("click", async function () {
   await wait(200);
 
   if (!gameStarted) {
-    $("h1").text(`Level ${level}`);
+    $("#level-title").text(`Level ${level}`);
     $(".colors-container").toggle();
     $(".gm-container").toggle();
     $("#main-menu-button").toggle();
-    gameStarted = true;
     gameModeSelected = this.id;
-    nextSequence();
+    gameStart();
   }
 });
 
@@ -54,6 +58,7 @@ $(".btn").on("click", function () {
 
 function playSound(name) {
   var buttonSound = new Audio(`sounds/${name}.mp3`);
+  buttonSound.currentTime = 0;
   buttonSound.play();
 }
 
@@ -74,7 +79,7 @@ async function nextSequence() {
   acceptingUserInput = false;
 
   level += 1;
-  $("h1").text(`NIVEL ${level}`);
+  $("#level-title").text(`NIVEL ${level}`);
 
   var randomNumber = Math.floor(Math.random() * 4);
   var randomChosenColor = buttonColors[randomNumber];
@@ -121,7 +126,9 @@ function checkAnswer(currentLevel) {
       $("body").removeClass("game-over");
     }, 200);
 
-    $("#level-title").text("GAME OVER, APERTE QUALQUER TECLA PARA REINICIAR");
+    $("#level-title").text(
+      "GAME OVER, APERTE QUALQUER TECLA OU TOQUE NA TELA PARA REINICIAR"
+    );
     startOver();
   }
 }

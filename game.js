@@ -9,13 +9,6 @@ var acceptingUserInput = false;
 function gameStart() {
   if (!gameStarted && gameModeSelected != null) {
     gameStarted = true;
-
-    ["red", "blue", "green", "yellow"].forEach((color) => {
-      const audio = new Audio(`sounds/${color}.mp3`);
-      audio.volume = 0;
-      audio.play().catch(() => {});
-    });
-
     nextSequence();
   }
 }

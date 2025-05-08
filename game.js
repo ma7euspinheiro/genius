@@ -21,6 +21,10 @@ var sounds = {
   wrong: new Audio("sounds/wrong.mp3"),
 };
 
+Object.values(sounds).forEach((sound) => {
+  sound.load(); // prepara sem tocar
+});
+
 $(document).on("touchstart", function (evento) {
   event.preventDefault();
   gameStart();
